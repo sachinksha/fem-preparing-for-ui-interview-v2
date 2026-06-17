@@ -1,15 +1,26 @@
 // bun test src/problems/06-es5-extends/test/es5-extends.test.ts
 
-export const myExtends = (SuperType: Function, SubType: Function) => {
-  // Step 1: Create a new constructor function MyType(this, ...args)
-  // Step 2: Set up prototype chain
-  // Step 3: Set up static/constructor inheritance
-  // Step 4: Return MyType
-}
+export const myExtends = (
+  SuperType: Function,
+  SubType: Function) => {
+    function ExtendedType(...args: any[]) {
+      // Step 1: Create a new constructor function MyType(this, ...args)
+      const target = Object.create(SubType.prototype);
+      SuperType.apply(target, args);
+      SubType.apply(target, args);
+      return target
+    }
+    // Step 2: Set up prototype chain
+    Object.setPrototypeOf(SubType.prototype, SuperType.prototype);
+    // Step 3: Set up static/constructor inheritance
+    Object.setPrototypeOf(ExtendedType, SuperType);
+    // Step 4: Return MyType
+    return ExtendedType
+  }
 
 // --- Examples ---
 // Uncomment to test your implementation:
-
+//
 // function Animal(this: any, name: string) { this.name = name }
 // Animal.print = () => { console.log('Animal') }
 // Animal.prototype.greet = function () { return `Hello, ${this.name}` }
@@ -23,5 +34,5 @@ export const myExtends = (SuperType: Function, SubType: Function) => {
 // console.log(dog.breed)   // Expected: "Labrador"
 // console.log(dog.greet()) // Expected: "Hello, Rex"
 // console.log(dog.bark())  // Expected: "Rex says Woof!"
-// console.log(dog instanceof Animal) // Expected: true
+// console.log(dog instanceof Animal); // Expected: true
 // (DogExtended as any).print() // Expected: "Animal"
