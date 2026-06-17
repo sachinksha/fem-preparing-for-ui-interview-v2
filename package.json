@@ -34,6 +34,7 @@
     "globals": "^16.5.0",
     "lightningcss": "^1.30.2",
     "prettier": "^3.8.0",
+    "tsx": "^4.22.4",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.3"
   }
