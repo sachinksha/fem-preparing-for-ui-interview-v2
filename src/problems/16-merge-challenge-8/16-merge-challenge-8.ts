@@ -15,8 +15,9 @@ import type { Equal, Expect } from '@course/types'
 
 /* _____________ Your Code Here _____________ */
 
-// Your implementation here
-
+type Merge<K extends {}, R extends {}> = {
+  [Property in keyof (K & R)]: Property extends keyof R ? R[Property] : Property extends keyof K ? K[Property] : never
+}
 /* _____________ Test Cases _____________ */
 
 type Foo = { a: number; b: string }
