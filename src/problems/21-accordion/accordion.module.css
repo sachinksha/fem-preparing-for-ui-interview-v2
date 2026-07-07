@@ -30,15 +30,21 @@
    - set max-height to 0
    - hide overflow */
 .details::details-content {
-    transition: max-height 0.3s ease, content-visibility 0.3s allow-discrete;
     max-height: 0;
-    overflow: hidden;
+    opacity: 0;
+    overflow: clip;
+    transition:
+        max-height 0.3s ease,
+        opacity 0.3s ease,
+        content-visibility 0.3s allow-discrete;
 }
+
 
 /* When open, expand content */
 .details[open]::details-content {
-    max-height: 200px;
+    max-height: 500px;
     overflow: scroll;
+    opacity: 1;
 }
 
 .marker {
@@ -54,4 +60,14 @@ ul li {
     margin: 10px;
     border: 1px solid #efefef;
     box-sizing: border-box;
+}
+ /* Another way to add and animate marker for the accordian */
+summary::after {
+    content: "=";
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+details[open] > summary::after {
+    transform: rotate(90deg);
+    content: "=";
 }
