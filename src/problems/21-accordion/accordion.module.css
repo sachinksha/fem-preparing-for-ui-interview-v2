@@ -3,31 +3,55 @@
 /* style the clickable header
 - hide default marker with list-style: none */
 .summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    background: #efefef;
 }
 
 /* Hide the default disclosure triangle in WebKit browsers */
 .summary::-webkit-details-marker {
+    list-style: none;
 }
 
 /* Details: style the accordion item wrapper */
 .details {
+    border: 1px solid #efefef;
 }
-
+.details section{
+    padding: 10px;
+}
 /* Animate content expansion using ::details-content pseudo-element
    - transition max-height (0.3s ease) and content-visibility (0.3s allow-discrete)
    - set max-height to 0
    - hide overflow */
 .details::details-content {
+    transition: max-height 0.3s ease, content-visibility 0.3s allow-discrete;
+    max-height: 0;
+    overflow: hidden;
 }
 
 /* When open, expand content */
 .details[open]::details-content {
-
-/* Optional - style marker */
-/* Custom indicator (plus sign) */
-.summary::after {
+    max-height: 200px;
+    overflow: scroll;
 }
 
-/* Rotate the indicator when the item is open */
-.details[open] .summary::after {
+.marker {
+    transition: transform 0.2s ease;
+}
+/* Optional - style marker */
+/* Custom indicator (plus sign) */
+.details[open] .marker {
+    transform: rotate(45deg);
+}
+
+ul li {
+    margin: 10px;
+    border: 1px solid #efefef;
+    box-sizing: border-box;
 }
